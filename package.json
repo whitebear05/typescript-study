@@ -1,0 +1,13 @@
+{
+  "name": "typescript-study",
+  "version": "1.0.0",
+  "description": "Learning Typescript by making a Blockchain with it",
+  "main": "index.js",
+  "repository": "https://github.com/whitebear05/typescript-study.git",
+  "author": "whitebear <woojs0505@naver.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "prestart": "tsc"
+  }
+}
