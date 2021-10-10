@@ -13,6 +13,11 @@ class Block {
 Block.calculateBlockHash = (index, previousHash, timestamp, data) => {
     return CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 };
+Block.validateStructure = (aBlock) => typeof aBlock.index === "number" &&
+    typeof aBlock.hash === "string" &&
+    typeof aBlock.previousHash === "string" &&
+    typeof aBlock.timestamp === "number" &&
+    typeof aBlock.data === "string";
 const genesisBlock = new Block(0, "2020202003423", "", "Hello", 123456);
 let blockchain = [genesisBlock];
 const getBlockchain = () => blockchain;
@@ -26,5 +31,15 @@ const createNewBlock = (data) => {
     const newBlock = new Block(newIndex, newHash, previousBlock.hash, data, newTimestamp);
     return newBlock;
 };
-console.log(createNewBlock("hello"), createNewBlock("bye bye"));
+const isBlockValid = (candidateBlock, previousBlock) => {
+    if (Block.validateStructure(candidateBlock)) {
+        return false;
+    }
+    else if (previousBlock.index + 1 !== candidateBlock.index) {
+        return false;
+    }
+    else if (previousBlock.hash !== candidateBlock.previousHash) {
+        return false;
+    }
+};
 //# sourceMappingURL=index.js.map
